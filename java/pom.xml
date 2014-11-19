@@ -49,10 +49,37 @@
             <goals><goal>jar</goal></goals>
           </execution>
         </executions>
-      </plugin>
+	</plugin>
+	<plugin>
+	<groupId>org.sonatype.plugins</groupId>
+	<artifactId>nexus-staging-maven-plugin</artifactId>
+	<version>1.6.5</version>
+	<executions>
+	<execution>
+	<id>default-deploy</id>
+	<phase>deploy</phase>
+	<goals>
+	<goal>deploy</goal>
+	</goals>
+	</execution>
+	</executions>
+	<configuration>
+	<serverId>ubi-deployment</serverId>
+	<nexusUrl>http://192.168.2.199:8081/nexus/</nexusUrl>
+	<skipStaging>true</skipStaging>
+	</configuration>
+	</plugin>
     </plugins>
   </build>
-  <dependencies>
+        <distributionManagement>
+	                <snapshotRepository>
+			                        <id>ubi-deployment</id>
+						                        <name>Ubivent Snapshots</name>
+									                        <url>http://192.168.2.199:8081/nexus/content/repositories/thirdparty-snapshots/</url>
+												                </snapshotRepository>
+														        </distributionManagement>
+
+<dependencies>
     <dependency>
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
